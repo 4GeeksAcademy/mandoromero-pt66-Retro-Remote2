@@ -3,8 +3,9 @@ import { func } from "prop-types";
 
 import React from 'react';
 import { useGlobalReducer } from '../store'; 
-import TopRated from '../components/TopRated'; 
+// import TopRated from '../components/TopRated'; 
 import FetchInitialData from '../FetchInitialData';
+import { SignUp } from '../components/SignUp';
 
 
 import { useState } from "react";
@@ -32,7 +33,7 @@ export const Home = () => {
 	return (
 		<div className="text-center mt-5">
 			 <FetchInitialData />
-			 <TopRated />
+			 <SignUp />
 		</div>
 	);
 }; 

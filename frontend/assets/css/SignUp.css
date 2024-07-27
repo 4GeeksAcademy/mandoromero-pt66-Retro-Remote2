@@ -1,0 +1,25 @@
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    border: 1px red dashed;
+    width: 75%
+  }
+  
+  .labels, .inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .labels label {
+    margin-bottom: 15px;
+    margin-left:400px;
+  
+  .inputs input {
+    margin-bottom: 10px;
+   
+  }
+  
+  .error-messages {
+    color: red;
+  }
+  

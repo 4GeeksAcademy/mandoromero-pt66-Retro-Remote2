@@ -14,7 +14,6 @@ flask-admin = "*"
 python-dotenv = "*"
 flask-jwt-extended = "*"
 requests = "*"
-bcrypt = "*"
 
 [dev-packages]
 

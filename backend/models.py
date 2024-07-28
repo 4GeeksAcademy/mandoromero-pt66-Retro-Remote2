@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
+import werkzueg.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -15,8 +15,11 @@ class User(db.Model):
     
     def set_password(self, password):
         #Generate a salt and hash the password
-        hashed-password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        self.password = hashed_password.decode(utf-8)
+       self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        #check if passwords match   
+        return check-password-hash (self.password, password)
 
     def serialize(self):
         return {

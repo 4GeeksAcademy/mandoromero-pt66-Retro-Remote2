@@ -29,4 +29,4 @@ const FetchInitialData = () => {
   return null; // This component does not render anything
 };
 
-export default FetchInitialData;
+export default FetchInitialData

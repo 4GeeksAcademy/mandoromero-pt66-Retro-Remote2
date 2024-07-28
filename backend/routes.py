@@ -64,6 +64,19 @@ def add_review():
 
     return jsonify(review.serialize())
 
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
+    if user and user.check-password(password):
+        return jsonify({'message': 'Login successful.'}), 200
+    else:
+        return jsonify({'message': 'Invalid email or password'}). 401
+
+    
 @api.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -79,6 +92,8 @@ def register():
     new_user = User(email=email, password=password)
     db.session.add(new_user)
     db.session.commit()
+
+ 
 
     return jsonify(new_user.serialize()), 201
 

@@ -1,25 +1,47 @@
 .form-group {
-    display: flex;
-    justify-content: space-between;
-    border: 1px red dashed;
-    width: 75%
-  }
-  
-  .labels, .inputs {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .labels label {
-    margin-bottom: 15px;
-    margin-left:400px;
-  
-  .inputs input {
-    margin-bottom: 10px;
-   
-  }
-  
-  .error-messages {
-    color: red;
-  }
-  
+  display: flex;
+  justify-content: center;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 0 10px 0;
+  margin-top: 10px;
+  color: #fed8b1;
+  border: 5px black ridge;
+  background-color: #0c0908;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+  rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.labels, .inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.labels label {
+  margin-bottom: 15px;
+}
+.inputs input {
+  margin-top: 8px;
+}
+
+button {
+  margin-top: 20px;
+  color: #fed8b1;
+  background-color: #0c0908;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+  rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+}
+
+.error-messages {
+  color: red;
+}
+

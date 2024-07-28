@@ -8,7 +8,7 @@ import {
 import Layout from "./pages/Layout";
 import { Home } from "./pages/Home";
 import FetchInitialData from "./FetchInitialData";
-import { MovieDetails } from "./components/MovieDetails";
+// import { MovieDetails } from "./components/MovieDetails";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -24,7 +24,7 @@ export const router = createBrowserRouter(
         {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
         <Route path="/" element={<Home />} />
         <Route path="/" element={<FetchInitialData />} />
-        <Route path="movie/:id" element={<MovieDetails/>}/>
+        {/* <Route path="movie/:id" element={<MovieDetails/>}/> */}
 
       </Route>
     )

@@ -1,5 +1,4 @@
 import { func } from "prop-types";
-// Home.js
 
 import React from 'react';
 import { useGlobalReducer } from '../store'; 
@@ -33,6 +32,7 @@ export const Home = () => {
 	return (
 		<div className="text-center mt-5">
 			 <FetchInitialData />
+			 {/* <SignUp /> */}
 			 <SignUp />
 		</div>
 	);

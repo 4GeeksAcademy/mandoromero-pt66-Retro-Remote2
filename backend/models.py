@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import bcrypt
 
 db = SQLAlchemy()
 
@@ -11,6 +12,11 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.email}>'
+    
+    def set_password(self, password):
+        #Generate a salt and hash the password
+        hashed-password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        self.password = hashed_password.decode(utf-8)
 
     def serialize(self):
         return {

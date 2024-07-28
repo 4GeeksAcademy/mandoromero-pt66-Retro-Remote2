@@ -63,3 +63,24 @@ def add_review():
     db.session.refresh(review)
 
     return jsonify(review.serialize())
+
+@api.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    # Check if email is already registered
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({'message': 'Email already registered.'}), 400
+
+    # If email is not registered, create a new user
+    new_user = User(email=email, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify(new_user.serialize()), 201
+
+
+    

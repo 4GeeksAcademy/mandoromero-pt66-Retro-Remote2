@@ -84,11 +84,13 @@ export const SignUp = () => {
           email,
           password,
         });
-        console.log('Registration successful:', response.data);
         setSuccess(true);
       } catch (error) {
-        console.error('Registration error:', error);
-        setErrors({ server: 'An error occurred during registration. Please try again.' });
+        if (error.response && error.response.data.message) {
+          setErrors({ server: error.response.data.message });
+        } else {
+          setErrors({ server: 'An error occurred during registration. Please try again.' });
+        }
       } finally {
         setLoading(false);
       }
@@ -166,3 +168,4 @@ export const SignUp = () => {
     </div>
   );
 };
+

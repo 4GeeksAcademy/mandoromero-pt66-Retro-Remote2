@@ -1,16 +1,51 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, Blueprint
 from backend.models import db, User, Reviews
 from flask_cors import CORS
 import requests
 
-
-
 TMDB_API_KEY = 'ef1972bcabdcfd5e6e3b2b9c7b92661d'
 
 api = Blueprint('api', __name__, url_prefix="/api")
+
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json(
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not first_name or last_name or not email or not Password:
+        return jsonify({ 'error': 'Missing required fields'}),400
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email already registered successfully'}), 201
+
+    new_user = User(
+        first_name=first_name,
+        last_name=last_name,
+        email=email
+    )
+    new_user.set_password(password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': 'User registered successfully'}), 201
+   
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
+
+    if user and user.check_password(password):
+    # If you have token-based authentication, generate and return a token here.
+        return jsonify({'message': 'Login successful', 'user': user.serialize()}), 200
+    else:
+        return jsonify({'error': 'Invalid email or password'}), 401
 
 @api.route('/top-rated/movies', methods=['GET'])
 def get_top_rated_movies():
@@ -39,63 +74,25 @@ def search():
         return jsonify(response.json())
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
-# Register the Blueprint with the Flask app
-# app.register_blueprint(api)
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
-
 
 @api.route("/review", methods=["POST"])
 def add_review():
     print('method called')
     body = request.json
-
     print(body)
-    
-    review = Reviews(
-        review=body["reviewData"],
-        movie_id=body["movieId"]
-    )
-    db.session.add(review)
-    db.session.commit()
-    db.session.refresh(review)
 
-    return jsonify(review.serialize())
-
-@api.route('/login', methods=['POST'])
-def login():
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
-
-    user = User.query.filter_by(email=email).first()
-    if user and user.check-password(password):
-        return jsonify({'message': 'Login successful.'}), 200
-    else:
-        return jsonify({'message': 'Invalid email or password'}). 401
-
-    
-@api.route('/register', methods=['POST'])
-def register():
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
-
-    # Check if email is already registered
-    existing_user = User.query.filter_by(email=email).first()
-    if existing_user:
-        return jsonify({'message': 'Email already registered.'}), 400
-
-    # If email is not registered, create a new user
-    new_user = User(email=email, password=password)
-    db.session.add(new_user)
-    db.session.commit()
-
- 
-
-    return jsonify(new_user.serialize()), 201
+    try:
+        review = Reviews(
+            review=body["reviewData"],
+            movie_id=body["movieId"],
+            user_id=body["userId"]
+        )
+        db.session.add(review)
+        db.session.commit()
+        db.session.refresh(review)
+        return jsonify(review.serialize()), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
-    
+
